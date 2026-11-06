@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Lily — A Birthday Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #c8b8d4 0%, #a89bc2 20%, #b8a8c8 40%, #d4c8e0 60%, #e0d8ec 80%, #c8b8d4 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cloud overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(255,255,255,0.08) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-logo::before {
+            content: '✦';
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .header-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+        }
+
+        /* Main Card */
+        .main-card {
+            max-width: 900px;
+            margin: 20px auto 60px;
+            background: rgba(245, 242, 238, 0.92);
+            border-radius: 20px;
+            padding: 60px 70px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #8b7355;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .main-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #2a2a2a;
+            margin-bottom: 30px;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .main-heading .dots {
+            color: #c4956a;
+        }
+
+        /* Content with image layout */
+        .content-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .content-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .content-text {
+            flex: 1;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            font-weight: 300;
+        }
+
+        .manga-image {
+            width: 200px;
+            min-width: 200px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 8px;
+        }
+
+        .manga-image-wrapper {
+            background: #fff;
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+        }
+
+        .manga-image-wrapper.right {
+            transform: rotate(2deg);
+        }
+
+        .manga-image-wrapper img {
+            width: 180px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Music Button */
+        .music-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .music-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #6b5b4f;
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .music-btn:hover {
+            background: #5a4a3e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107,91,79,0.3);
+        }
+
+        .music-btn .note {
+            font-size: 1.1rem;
+        }
+
+        .music-hint {
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 12px;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* Footer text */
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #8b7355;
+        }
+
+        .footer-text .sparkle {
+            color: #c4956a;
+        }
+
+        /* Made with badge */
+        .made-with {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .made-with .icon {
+            font-size: 1rem;
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 25px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-card {
+                margin: 10px 15px 40px;
+                padding: 35px 25px;
+            }
+
+            .main-heading {
+                font-size: 2.2rem;
+            }
+
+            .content-row,
+            .content-row.reverse {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .manga-image-wrapper {
+                transform: rotate(0deg);
+            }
+
+            .manga-image-wrapper.right {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Page title */
+        .page-title {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .fade-in:nth-child(2) { animation-delay: 0.3s; }
+        .fade-in:nth-child(3) { animation-delay: 0.6s; }
+        .fade-in:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="header-logo">My Lily</a>
+        <span class="header-subtitle">A little letter, just for you</span>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-card">
+        
+        <div class="fade-in">
+            <p class="section-label">A Day Made For You</p>
+            <h1 class="main-heading">Hello my princess Lia<span class="dots">..</span></h1>
+        </div>
+
+        <!-- First content row -->
+        <div class="content-row fade-in">
+            <div class="content-text">
+                Today is your 20th birthday, I hope it is a happy birthday for you and that all your coming days are filled with joy and happiness
+            </div>
+            <div class="manga-image-wrapper">
+                <!-- استبدل هذا برابط صورتك الأولى -->
+                <img src="../New folder/letter-photo-1_5b04b378.jpg" alt="A tender manga scene between two characters">
+            </div>
+        </div>
+
+        <!-- Second content row -->
+        <div class="content-row reverse fade-in">
+            <div class="content-text">
+                I may only have a few words, but my words come from my heart, because you specifically are, let's say, wonderful, delightful, and your presence has a special mark on my days. I hope this simple gift will be enough this year... I will try my best to make your next birthday better, I will stay by your side until then, even if I am busy I will be there for you. I hope you have a happy birthday again
+            </div>
+            <div class="manga-image-wrapper right">
+                <!-- استبدل هذا برابط صورتك الثانية -->
+                <img src="../New folder/letter-photo-2_8d0347a6.jpg" alt="A black-and-white manga panel of two characters together">
+            </div>
+        </div>
+
+        <!-- Music Section -->
+        <div class="music-section fade-in">
+            <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+                <span class="note">♪</span>
+                <span id="musicText">Play background music</span>
+            </button>
+            <p class="music-hint">If the music does not start automatically, press play. Your browser may require this first interaction.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-text fade-in">
+            Made of words I kept for you <span class="sparkle">✦</span>
+        </div>
+
+    </div>
+
+    <!-- Made with badge -->
+    <div class="made-with">
+        <span class="icon">🤍</span>
+        Made with love
+    </div>
+
+    <!-- Audio element (أضف رابط الموسيقى هنا) -->
+    <audio id="bgMusic" loop>
+        <source src="../New folder/موسيقى ذكريات لا تموت.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Music toggle
+        let isPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const text = document.getElementById('musicText');
+            if (isPlaying) {
+                music.pause();
+                text.textContent = 'Play background music';
+            } else {
+                music.play();
+                text.textContent = 'Pause background music';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
